@@ -1,0 +1,18 @@
+.heading {
+  text-align: center;
+  color: #ff0055;
+  letter-spacing: 2px;
+  padding: 2rem;
+}
+
+.main input {
+  display: inline-block;
+  padding: 1rem;
+  margin: 1rem;
+  font-size: 1.333rem;
+  width: 36%;
+}
+
+.main input[type="button"] {
+  background-color: #ff0055;
+}
