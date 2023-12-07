@@ -14,8 +14,8 @@ export default function Links() {
       <li className={pathname == 'dashboard/products' ? classes.active : ''}>
         <Link href="dashboard/products">Products</Link>
       </li>
-      <li className={pathname == '/dashboard/add-product' ? classes.active : ''}>
-        <Link href="dashboard/add-product">Add Product</Link>
+      <li className={pathname == '/dashboard/create-product' ? classes.active : ''}>
+        <Link href="dashboard/create-product">Create Product</Link>
       </li>
       <li className={pathname == '/dashboard/orders' ? classes.active : ''}>
         <Link href="dashboard/orders">Orders</Link>

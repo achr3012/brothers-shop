@@ -1,0 +1,76 @@
+.form {
+  background-color: #fff;
+  border: 2px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 2rem;
+  border-radius: 10px;
+}
+
+.formGroup label {
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  color: #666;
+}
+
+.formGroup input:not([type="checkbox"]),
+.formGroup textarea {
+  display: block;
+  outline: none;
+  padding: 1rem;
+  background: transparent;
+  border-radius: 10px;
+  border: 2px solid #ddd;
+  margin-top: 7px;
+  color: #000;
+  width: 100%;
+  font-size: 1rem;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.formGroup input:not([type="checkbox"]):hover,
+.formGroup textarea:hover {
+  border-color: #bbbbbb;
+}
+.formGroup input:not([type="checkbox"]):focus,
+.formGroup textarea:focus {
+  border-color: #00ffffa8;
+}
+
+.formGroup textarea {
+  resize: vertical;
+  max-height: 180px;
+  min-height: 80px;
+}
+
+.formGroup input[type="number"] {
+  width: 180px;
+}
+
+.formGroup input[type="checkbox"] {
+  margin-right: 13px;
+  -webkit-cursor: pointer;
+  -moz-cursor: pointer;
+  cursor: pointer;
+  transform: scale(1.5);
+}
+
+.submit {
+  padding: 1rem 2rem;
+  background: #00ffffa8;
+  color: #000;
+  font-family: inherit;
+  width: fit-content;
+  cursor: pointer;
+  border-radius: 2rem;
+  font-size: 1em;
+  border: none;
+  transition: background 0.2s ease-in-out;
+}
+
+.submit:hover {
+  background: aqua;
+}

@@ -120,8 +120,13 @@ ul {
 
 .main > .content {
   flex-grow: 1;
-  background-color: #fff;
-  color: #222;
+  background-color: #f7f7f7;
+  color: #000;
   border-radius: 1rem;
   min-height: calc(100vh - 2rem);
+  padding: 1rem 10%;
+}
+
+.page-title {
+  padding: 2rem 0;
 }

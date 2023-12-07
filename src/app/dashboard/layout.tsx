@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 const rubik = Rubik({
   subsets: ['latin'],
-  weight: ['400', '600']
+  weight: ['400', '500', '600']
 })
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
