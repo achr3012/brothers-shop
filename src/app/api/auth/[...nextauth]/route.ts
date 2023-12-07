@@ -15,7 +15,7 @@ const handler = NextAuth({
         const user = {
           id: "1",
           username: "admin",
-          password: "pass@3012"
+          password: process.env.AUTH_PASSWORD as string
         }
 
         // If no error and we have user data, return it

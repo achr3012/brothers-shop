@@ -1,0 +1,30 @@
+.navbar {
+  display: flex;
+  flex-direction: column;
+  padding-left: 2rem;
+}
+
+.navbar ul {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.navbar ul a {
+  padding: 1rem 0 1rem 2rem;
+  display: block;
+  transition: padding 0.2s ease-in-out;
+  border-radius: 2rem;
+}
+
+.navbar ul a:hover {
+  padding-left: 2.333em;
+}
+
+.navbar .active a {
+  color: #000;
+  font-weight: 600;
+  background: aqua;
+  padding-left: 2.333em;
+}

@@ -1,8 +1,11 @@
+import Logo from "@/components/Logo";
 
+export default async function Dashboard() {
 
-export default function Dashboard() {
   return (
-    <div>DashBoard</div>
+    <>
+      <Logo light />
+      <h1>DashBoard</h1>
+    </>
   )
 }
-

@@ -1,0 +1,44 @@
+.logo,
+.logoLight {
+  display: inline-block;
+}
+
+.logo a,
+.logoLight a {
+  display: flex;
+  align-items: center;
+}
+
+.logo a:hover span {
+  color: #eee;
+}
+
+.logoLight a:hover span {
+  color: #333;
+}
+
+.logo img,
+.logoLight img {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.logo span,
+.logoLight span {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-left: -39px;
+  background: #000;
+  position: relative;
+  top: 10px;
+  transition: color 0.2s ease-in-out;
+}
+
+.logoLight img {
+  filter: invert(100%);
+}
+
+.logoLight span {
+  background: #fff;
+}
