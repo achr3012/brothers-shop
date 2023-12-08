@@ -74,3 +74,7 @@
 .submit:hover {
   background: aqua;
 }
+
+.uploadedImages {
+  display: flex;
+}
