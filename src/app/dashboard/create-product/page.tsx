@@ -7,19 +7,9 @@ import Image from 'next/image'
 import { useState } from 'react'
 
 export default function AddProduct() {
-  const [uploadedImages] = useState<string[]>([])
-  const createProductWithImages = createProduct.bind(null, uploadedImages)
+  const [uploadedImages, setUploadedImages] = useState<string[]>([])
 
-  const Uploaded = () => {
-    if (!uploadedImages.length) return null
-    return (
-      <ul className={classes.uploadedImages}>
-        {uploadedImages.map(url => (
-          <li key={url}><Image src={url} width={120} height={120} alt="product" /></li>
-        ))}
-      </ul>
-    )
-  }
+  const createProductWithImages = createProduct.bind(null, uploadedImages)
 
   return (
     <>
@@ -36,15 +26,18 @@ export default function AddProduct() {
           <textarea name="desc" id="desc" placeholder='Type here'></textarea>
         </div>
 
-        <div className={classes.formGroup}>
-          <UploadButton
-            endpoint="imagesUploader"
-            onClientUploadComplete={(res) => res.map(img => uploadedImages.push(img.url))}
-            onUploadError={(error: Error) => alert(`ERROR! ${error.message}`)}
-          />
-        </div>
+        <UploadButton
+          className={classes.uploadButton}
+          endpoint="imagesUploader"
+          onClientUploadComplete={(res) => res.map(img => setUploadedImages([...uploadedImages, img.url]))}
+          onUploadError={(error: Error) => alert(`ERROR! ${error.message}`)}
+        />
 
-        <Uploaded />
+        {uploadedImages.length > 0 && (
+          <ul className={classes.uploadedImages}>
+            {uploadedImages.map(url => <li key={url}><Image src={url} width={120} height={120} alt="product" /></li>)}
+          </ul>
+        )}
 
         <div className={classes.formGroup}>
           <label htmlFor="price">Price (DZD)</label>

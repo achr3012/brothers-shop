@@ -77,4 +77,15 @@
 
 .uploadedImages {
   display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.uploadButton {
+  justify-content: flex-start;
+  flex-direction: row;
+}
+
+.uploadButton label {
+  color: #fff;
 }
