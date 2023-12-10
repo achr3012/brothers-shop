@@ -84,6 +84,7 @@
 .uploadButton {
   justify-content: flex-start;
   flex-direction: row;
+  gap: 10px;
 }
 
 .uploadButton label {

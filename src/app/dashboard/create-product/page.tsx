@@ -1,29 +1,52 @@
 "use client"
 
-import classes from './page.module.css'
-import { createProduct } from '@/lib/actions'
+import { useState } from 'react'
+import { useFormStatus } from 'react-dom'
+import { useFormState } from 'react-dom'
 import { UploadButton } from '@/lib/uploadthing'
 import Image from 'next/image'
-import { useState } from 'react'
+import { createProduct } from '@/lib/actions'
+import classes from './page.module.css'
+
+
+const initialState: any = {
+  message: "",
+}
 
 export default function AddProduct() {
   const [uploadedImages, setUploadedImages] = useState<string[]>([])
 
-  const createProductWithImages = createProduct.bind(null, uploadedImages)
+  const [state, formAction] = useFormState(createProduct, initialState)
+  const { pending } = useFormStatus()
+
+  const handelSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    if (uploadedImages.length == 0) {
+      return alert("Upload at least one image")
+    }
+
+    const formData = new FormData(e.currentTarget as HTMLFormElement)
+
+    formAction(formData)
+  }
+  console.log(state)
 
   return (
     <>
       <h2 className="page-title">Create a new Product</h2>
-
-      <form action={createProductWithImages} className={classes.form}>
+      <p aria-live="polite" className={classes.error}>
+        {state?.message}
+      </p>
+      <form onSubmit={handelSubmit} action={formAction} className={classes.form}>
         <div className={classes.formGroup}>
           <label htmlFor="title">Product Title</label>
-          <input type='text' name='title' id='title' placeholder='IPhone 15Pro Max' />
+          <input type='text' name='title' id='title' placeholder='IPhone 15Pro Max' required />
         </div>
 
         <div className={classes.formGroup}>
           <label htmlFor="desc">Product Description</label>
-          <textarea name="desc" id="desc" placeholder='Type here'></textarea>
+          <textarea name="desc" id="desc" placeholder='Type here' required></textarea>
         </div>
 
         <UploadButton
@@ -41,7 +64,7 @@ export default function AddProduct() {
 
         <div className={classes.formGroup}>
           <label htmlFor="price">Price (DZD)</label>
-          <input type='number' name='price' id='price' placeholder='40Mlyoun 😄' />
+          <input type='number' name='price' id='price' placeholder='40Mlyoun 😄' required />
         </div>
 
         <div className={classes.formGroup}>
@@ -49,7 +72,9 @@ export default function AddProduct() {
           <label htmlFor="publish">Publish on site</label>
         </div>
 
-        <button type='submit' className={classes.submit}>Submit</button>
+        <input type="hidden" name="images" value={uploadedImages} />
+
+        <button type='submit' className={classes.submit} disabled={pending}>Submit</button>
       </form>
     </>
   )
