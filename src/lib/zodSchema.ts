@@ -19,7 +19,7 @@ export const productSchema = z.object(
     price: z.number({
       invalid_type_error: 'Invalid Price',
     })
-      .gte(50).int().positive(),
+      .gte(50, "Price must be greater than or equal 50").int(),
     publish: z.boolean()
   },
 )

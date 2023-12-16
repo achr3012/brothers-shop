@@ -46,3 +46,8 @@ export async function createProduct(prevState: any, formData: FormData) {
   redirect(`/dashboard/?newProduct=${product.id}`)
 
 }
+
+export async function getProducts() {
+  const products = await prisma.product.findMany({ take: 7 })
+  return products
+}

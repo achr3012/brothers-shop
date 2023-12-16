@@ -3,7 +3,7 @@
   border: 2px solid #ddd;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
   padding: 2rem;
   border-radius: 10px;
 }
@@ -41,9 +41,10 @@
 }
 
 .formGroup textarea {
+  font-family: inherit;
   resize: vertical;
-  max-height: 180px;
-  min-height: 80px;
+  max-height: 220px;
+  min-height: 120px;
 }
 
 .formGroup input[type="number"] {
@@ -89,4 +90,43 @@
 
 .uploadButton label {
   color: #fff;
+}
+
+.error {
+  background-color: hsl(0deg 100% 50% / 16%);
+  border: 1px solid hsl(0deg 100% 50% / 33%);
+  color: #8d0000;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 0.9em;
+}
+
+.formGroup .error {
+  margin-top: 10px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .form {
+    background-color: #222;
+    border: 2px solid #333;
+  }
+
+  .formGroup input:not([type="checkbox"]),
+  .formGroup textarea {
+    border-color: #444;
+    color: #fff;
+  }
+
+  .formGroup input:not([type="checkbox"]):hover,
+  .formGroup textarea:hover {
+    border-color: #666;
+  }
+
+  .formGroup label {
+    color: #cacaca;
+  }
+
+  .error {
+    color: rgb(255 100 100);
+  }
 }

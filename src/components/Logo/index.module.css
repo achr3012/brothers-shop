@@ -30,6 +30,7 @@
   font-weight: 600;
   margin-left: -39px;
   background: #000;
+  color: #fff;
   position: relative;
   top: 10px;
   transition: color 0.2s ease-in-out;
@@ -40,5 +41,6 @@
 }
 
 .logoLight span {
-  background: #fff;
+  background: #f7f7f7;
+  color: #000;
 }
