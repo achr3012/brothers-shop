@@ -10,10 +10,68 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  position: relative;
   padding: 1rem;
   background-color: #eee;
   border: 1px solid #ccc;
   border-radius: 6px;
+}
+
+.products > div > a img {
+  border: 3px solid transparent;
+  transition: border-color 0.2s ease-in;
+}
+
+.products > div > a:hover img {
+  border-color: #0ff;
+}
+
+.published {
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 1.4rem;
+  height: 1.4rem;
+  opacity: 0.4;
+  margin: 1.2rem;
+  border: 3px solid transparent;
+  box-sizing: content-box;
+  transition: 0.2s ease-in-out;
+}
+
+.published:hover {
+  border-color: rgb(160, 160, 160);
+  opacity: 0.9;
+}
+
+.published:hover span {
+  visibility: visible;
+  opacity: 1;
+  right: 2rem;
+}
+
+.published span {
+  position: absolute;
+  width: max-content;
+  visibility: hidden;
+  opacity: 0;
+  font-size: 14px;
+  right: 5rem;
+  top: 0;
+  background: rgb(0 0 0 / 50%);
+  padding: 3px 6px;
+  border-radius: 6px;
+  color: #fff;
+  transition: 0.3s ease-in-out;
+}
+
+.publishedTrue {
+  background-color: #2ecc71;
+}
+
+.publishedFalse {
+  background-color: #e74c3c;
 }
 
 .title {

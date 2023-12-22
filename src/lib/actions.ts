@@ -3,6 +3,7 @@
 import { redirect } from 'next/navigation'
 import prisma from '@/lib/prisma'
 import { productSchema } from './zodSchema'
+import { revalidatePath } from 'next/cache'
 
 
 export async function createProduct(prevState: any, formData: FormData) {
@@ -43,11 +44,8 @@ export async function createProduct(prevState: any, formData: FormData) {
     }
   })
 
+  revalidatePath('/dashboard')
+  revalidatePath('/dashboard/products')
   redirect(`/dashboard/?newProduct=${product.id}`)
 
-}
-
-export async function getProducts() {
-  const products = await prisma.product.findMany({ take: 7 })
-  return products
 }
