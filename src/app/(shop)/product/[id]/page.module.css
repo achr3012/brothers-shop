@@ -30,14 +30,12 @@
 }
 
 .photos ul {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-top: 0.6rem;
+  margin-top: 10px;
 }
 
 .photos ul li {
-  flex: 0.5;
+  display: inline-block;
+  width: 49.9%;
 }
 
 .buy {
