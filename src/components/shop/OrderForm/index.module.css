@@ -10,7 +10,7 @@
 .form select {
   width: 100%;
   display: block;
-  padding: 1rem;
+  padding: 8px 1rem;
   font-size: 1.1em;
   outline: none;
   border: 1.5px solid #555;

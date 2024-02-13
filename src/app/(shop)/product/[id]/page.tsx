@@ -24,8 +24,8 @@ async function ProductPage({ params }: { params: { id: string } }) {
         <Image src={product.images[0]} alt={product.title} width={300} height={300} />
       </div>
       <div className={styles.info}>
-        <h2 className={styles.title}>{product.title}</h2>
-        <p className={styles.desc}>{product.desc}</p>
+        <h2 className={styles.title} dir='auto'>{product.title}</h2>
+        <p className={styles.desc} dir='auto'>{product.desc}</p>
         {photos.length > 0 && (
           <div className={styles.photos}>
             <h2>Photos</h2>
@@ -42,7 +42,7 @@ async function ProductPage({ params }: { params: { id: string } }) {
         <OrderForm product={product} font={noto_sans_arabic} />
       </div>
       <div className={styles.buy}>
-        <p>{product.price}</p>
+        <p>{product.price} دج</p>
         <a href='#form'>Buy | شراء</a>
       </div>
     </>
