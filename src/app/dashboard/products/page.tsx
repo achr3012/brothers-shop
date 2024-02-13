@@ -9,6 +9,8 @@ export const metadata: Metadata = {
   description: 'Products | Dashboard | Brothers Shop',
 }
 
+export const dynamic = 'force-dynamic'
+
 export default async function Products() {
   const products = await getProducts()
   return (

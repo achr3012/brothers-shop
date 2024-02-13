@@ -10,6 +10,9 @@ const noto_sans_arabic = Noto_Sans_Arabic({
   subsets: ['arabic']
 })
 
+// Opt out of caching for all data requests in the route segment
+export const dynamic = 'force-dynamic'
+
 async function ProductPage({ params }: { params: { id: string } }) {
   const product = await getProduct(params.id)
   if (!product) notFound()
