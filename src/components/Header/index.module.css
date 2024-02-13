@@ -1,0 +1,11 @@
+.breaking {
+  background-color: aqua;
+  color: #000;
+  text-align: center;
+  padding: 6px 0;
+}
+
+.logo {
+  text-align: center;
+  padding: 1rem 0;
+}

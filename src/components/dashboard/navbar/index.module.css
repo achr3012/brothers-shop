@@ -11,6 +11,10 @@
   z-index: 1;
 }
 
+.navbar > div span {
+  background-color: #000;
+}
+
 .navbar ul {
   display: flex;
   flex-direction: column;

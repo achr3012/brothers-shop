@@ -1,0 +1,75 @@
+.thumb img {
+  width: 100%;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+}
+
+.title {
+  font-size: 2rem;
+}
+
+.desc {
+  color: #222;
+  line-height: 1.6;
+}
+
+@media (prefers-color-scheme: dark) {
+  .desc {
+    color: #e7e7e7;
+  }
+}
+
+.photos,
+.title {
+  font-weight: 600;
+}
+
+.photos ul {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 0.6rem;
+}
+
+.photos ul li {
+  flex: 0.5;
+}
+
+.buy {
+  position: fixed;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 12px;
+  background: #000;
+  border-radius: 2rem 2rem 0 0;
+}
+
+.buy p {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.buy a {
+  background: aqua;
+  color: #111;
+  padding: 8px 1rem;
+  font-size: 1.2em;
+  font-weight: 600;
+  border-radius: 7px;
+}
+
+.formContainer h3 {
+  text-align: center;
+  font-weight: 600;
+  padding: 1rem 0;
+}
