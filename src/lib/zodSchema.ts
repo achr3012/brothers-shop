@@ -23,3 +23,20 @@ export const productSchema = z.object(
     publish: z.boolean()
   },
 )
+
+// export interface OrderDataType {
+//   name: string;
+//   phone: string;
+//   wilaya: string;
+//   commune: string;
+//   delivery: string;
+// }
+
+export const orderSchema = z.object({
+  name: z.string(),
+  phone: z.string(),
+  wilaya: z.string(),
+  commune: z.string(),
+  delivery: z.string(),
+  productId: z.string()
+})

@@ -3,12 +3,7 @@ import { getProduct } from "@/lib/dbQueries"
 import styles from './page.module.css'
 import Image from 'next/image'
 import OrderForm from '@/components/shop/OrderForm'
-
-import { Noto_Sans_Arabic } from 'next/font/google'
-const noto_sans_arabic = Noto_Sans_Arabic({
-  weight: ['400', '600'],
-  subsets: ['arabic']
-})
+import { noto_sans_arabic } from '@/app/layout'
 
 // Opt out of caching for all data requests in the route segment
 export const dynamic = 'force-dynamic'
@@ -39,7 +34,7 @@ async function ProductPage({ params }: { params: { id: string } }) {
       </div>
       <div id="form" className={styles.formContainer}>
         <h3 className={noto_sans_arabic.className}>معلومات الزبون</h3>
-        <OrderForm product={product} font={noto_sans_arabic} />
+        <OrderForm productId={product.id} font={noto_sans_arabic} />
       </div>
       <div className={styles.buy}>
         <p>{product.price} دج</p>

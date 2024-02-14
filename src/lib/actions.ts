@@ -2,9 +2,8 @@
 
 import { redirect } from 'next/navigation'
 import prisma from '@/lib/prisma'
-import { productSchema } from './zodSchema'
+import { orderSchema, productSchema } from './zodSchema'
 import { revalidatePath } from 'next/cache'
-import { Product } from '@prisma/client'
 import { OrderDataType } from '@/components/shop/OrderForm'
 
 
@@ -52,6 +51,16 @@ export async function createProduct(prevState: any, formData: FormData) {
 
 }
 
-export async function createOrder(data: OrderDataType, product: Product) {
-  console.log(data)
+export async function createOrder(data: OrderDataType, productId: string) {
+
+  if (!orderSchema.safeParse({ ...data, productId })) {
+    return false;
+  }
+
+  const order = await prisma.order.create({
+    data: { ...data, productId }
+  })
+
+  return order;
+
 }

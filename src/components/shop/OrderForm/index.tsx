@@ -2,11 +2,13 @@
 
 import { useRef, useState, useTransition } from "react"
 
-import { Product } from "@prisma/client"
 import styles from './index.module.css'
 import { wilayas } from "@/lib/wilayas"
 import { createOrder } from "@/lib/actions"
 import { communes } from "@/lib/communes"
+import { NextFont } from "next/dist/compiled/@next/font"
+import { Order } from "@prisma/client"
+import OrderThanks from "../OrderThanks"
 
 //`https://www.google.com/search?q=Code+postal+${communeRef.current?.value}+${wilayaRef.current?.value}`
 export interface OrderDataType {
@@ -17,7 +19,7 @@ export interface OrderDataType {
   delivery: string;
 }
 
-function OrderForm({ product, font }: { product: Product, font: any }) {
+function OrderForm({ productId, font }: { productId: string, font: NextFont }) {
 
   const nameRef = useRef<HTMLInputElement>(null);
   const phoneRef = useRef<HTMLInputElement>(null);
@@ -26,8 +28,11 @@ function OrderForm({ product, font }: { product: Product, font: any }) {
   const deliveryRef = useRef<HTMLSelectElement>(null);
 
   const [isPending, startTransition] = useTransition();
-  const [errors, setErrors] = useState<Partial<OrderDataType>>({});
+
   const [wilaya, setWilaya] = useState(0)
+  const [errors, setErrors] = useState<Partial<OrderDataType>>({});
+  const [order, setOrder] = useState<Order | false>(false)
+
 
   const handleWilayaChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const regex = /\d+/;
@@ -50,40 +55,31 @@ function OrderForm({ product, font }: { product: Product, font: any }) {
       }
 
       const newErrors: Partial<OrderDataType> = {};
-      // if (data.name.length == 0 || data.phone.length || data.wilaya.length || data.commune.length || data.delivery.length) {
-      if (!data.name || data.name.length < 4) {
-        newErrors.name = 'الاسم الكامل 👤 مطلوب.';
-      }
+
+      if (!data.name || data.name.length < 4) newErrors.name = 'الاسم الكامل مطلوب.';
 
       const algerianPhoneRegex = /^(\+?213|0)(5|6|7)\d{8}$/;
-      if (!data.phone || !algerianPhoneRegex.test(data.phone)) {
-        newErrors.phone = "رقم الهاتف 📞 مطلوب."
-      }
+      if (!data.phone || !algerianPhoneRegex.test(data.phone)) newErrors.phone = "رقم الهاتف مطلوب."
 
       const wilayaRegex = /^(?:[1-9]|[1-4][0-9]|5[0-8])\s*~\s*\S+$/;
-      if (!data.wilaya || !wilayaRegex.test(data.wilaya)) {
-        newErrors.wilaya = "رقم الولاية مطلوب."
-      }
+      if (!data.wilaya || !wilayaRegex.test(data.wilaya)) newErrors.wilaya = "رقم الولاية مطلوب."
+
+      if (data.delivery !== 'التوصيل للمكتب' && data.delivery !== 'التوصيل لباب المنزل') newErrors.delivery = "طريقة التوصيل مطلوبة"
 
       setErrors(newErrors);
 
-      // // If there are no validation errors, submit the form
-      // if (Object.keys(newErrors).length === 0) {
-      //   // Submit the form data
-      //   console.log('Form submitted:', formData);
-      // }
-
       if (!isPending && Object.keys(newErrors).length === 0) {
         startTransition(async () => {
-          await createOrder(data, product);
+          const newOrder = await createOrder(data, productId);
+          setOrder(newOrder)
         })
       }
+
     }
-
   }
-
   return (
     <form onSubmit={submitHandler} className={`${styles.form} ${font.className}`} dir="rtl" lang="ar">
+      {order && <OrderThanks orderName={order.name} setOrder={setOrder} />}
       <div>
         <label htmlFor="name">الاسم الكامل 👤</label>
         <input ref={nameRef} type="text" id="name" placeholder="الاسم الكامل" />
@@ -116,14 +112,16 @@ function OrderForm({ product, font }: { product: Product, font: any }) {
       </div>
 
       <div>
-        <label htmlFor="delivery">إختر طريقة التوصيل</label>
+        <label htmlFor="delivery">طريقة التوصيل</label>
         <select ref={deliveryRef} id="delivery">
-          <option value={0}>التوصيل للمكتب</option>
-          <option value={1}>التوصيل لباب المنزل</option>
+          <option value={0}>إختر طريقة التوصيل</option>
+          <option value="التوصيل للمكتب">التوصيل للمكتب</option>
+          <option value="التوصيل لباب المنزل">التوصيل لباب المنزل</option>
         </select>
+        {errors.delivery && <span className={styles.error}>{errors.delivery}</span>}
       </div>
 
-      <button type="submit">اضغط هنا للطلب</button>
+      <button type="submit" disabled={isPending}>اضغط هنا للطلب</button>
 
     </form>
   )
