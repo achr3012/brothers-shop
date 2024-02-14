@@ -3,7 +3,12 @@ import { getProduct } from "@/lib/dbQueries"
 import styles from './page.module.css'
 import Image from 'next/image'
 import OrderForm from '@/components/shop/OrderForm'
-import { noto_sans_arabic } from '@/app/layout'
+
+import { Noto_Sans_Arabic } from 'next/font/google'
+const noto_sans_arabic = Noto_Sans_Arabic({
+  weight: ['400', '600'],
+  subsets: ['arabic']
+})
 
 // Opt out of caching for all data requests in the route segment
 export const dynamic = 'force-dynamic'
