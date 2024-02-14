@@ -10,7 +10,6 @@ import { NextFont } from "next/dist/compiled/@next/font"
 import { Order } from "@prisma/client"
 import OrderThanks from "../OrderThanks"
 
-//`https://www.google.com/search?q=Code+postal+${communeRef.current?.value}+${wilayaRef.current?.value}`
 export interface OrderDataType {
   name: string;
   phone: string;
@@ -71,6 +70,13 @@ function OrderForm({ productId, font }: { productId: string, font: NextFont }) {
       if (!isPending && Object.keys(newErrors).length === 0) {
         startTransition(async () => {
           const newOrder = await createOrder(data, productId);
+          if (nameRef.current && phoneRef.current && wilayaRef.current && communeRef.current && deliveryRef.current) {
+            nameRef.current.value = ""
+            phoneRef.current.value = ""
+            wilayaRef.current.value = ""
+            communeRef.current.value = ""
+            deliveryRef.current.value = ""
+          }
           setOrder(newOrder)
         })
       }

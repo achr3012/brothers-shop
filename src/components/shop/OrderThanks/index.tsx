@@ -24,7 +24,7 @@ export default function OrderThanks({ orderName, setOrder }: { orderName: string
     justifyContent: 'space-evenly',
     alignItems: 'center',
     textAlign: 'center',
-    padding: '0 1rem'
+    padding: '0px 1rem 9rem 1rem'
   }
 
   const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
@@ -37,15 +37,15 @@ export default function OrderThanks({ orderName, setOrder }: { orderName: string
     <div style={styles}>
       <div>
         <Image src="/thanks-msg.svg" width={90} height={90} alt="Thanks" />
-        <h2>شكرا جزيلاً على ثقتكم</h2>
+        <h3>شكرا جزيلاً على ثقتكم</h3>
       </div>
       <div>
-        <h1>{orderName}</h1>
-        <h3>نود أن نشكرك على اختيارك لمنتجنا، وسعداء بوجود عميل مثلك لدينا.</h3>
+        <h2>{orderName}</h2>
+        <h4>نود أن نشكرك على اختيارك لمنتجنا، وسعداء بوجود عميل مثلك لدينا.</h4>
       </div>
       <div>
         <Image src="/thanks-msg.png" width={300} height={175} alt="Thanks" />
-        <h4>سيتم الاتصال بك لاحقا لتاكيد طلبك 😊</h4>
+        <h5>سيتم الاتصال بك لاحقا لتاكيد طلبك 😊</h5>
       </div>
       <button onClick={closeOrder} type="button">استمر في التسوق</button>
     </div>

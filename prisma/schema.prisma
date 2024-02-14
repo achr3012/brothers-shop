@@ -11,24 +11,31 @@ datasource db {
 }
 
 model Product {
-  id        String    @id @default(cuid())
+  id        String   @id @default(cuid())
   title     String
   desc      String
   images    String[]
   price     Int
-  published Boolean   @default(false)
+  published Boolean  @default(false)
   orders    Order[]
-  createdAt DateTime? @default(now())
+  createdAt DateTime @default(now())
 }
 
 model Order {
-  id        String    @id @default(cuid())
+  id        String   @id @default(cuid())
   name      String
   phone     String
   wilaya    String
   commune   String
   delivery  String
-  product   Product   @relation(fields: [productId], references: [id])
+  product   Product  @relation(fields: [productId], references: [id])
   productId String
-  createdAt DateTime? @default(now())
+  status    Status   @default(PENDING)
+  createdAt DateTime @default(now())
+}
+
+enum Status {
+  PENDING
+  CONFIRMED
+  CANCELED
 }
