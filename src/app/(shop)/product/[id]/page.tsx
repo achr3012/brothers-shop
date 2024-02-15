@@ -1,17 +1,32 @@
 import { notFound } from 'next/navigation'
-import { getProduct } from "@/lib/dbQueries"
-import styles from './page.module.css'
 import Image from 'next/image'
+import prisma from '@/lib/prisma'
+import { getProduct } from "@/lib/dbQueries"
 import OrderForm from '@/components/shop/OrderForm'
 
+import type { Metadata, ResolvingMetadata } from 'next'
+import styles from './page.module.css'
 import { Noto_Sans_Arabic } from 'next/font/google'
 const noto_sans_arabic = Noto_Sans_Arabic({
   weight: ['400', '600'],
   subsets: ['arabic']
 })
 
-// Opt out of caching for all data requests in the route segment
-export const dynamic = 'force-dynamic'
+export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
+  const product = await prisma.product.findUnique({ where: { id: params.id }, select: { title: true, desc: true, images: true } })
+  return {
+    title: product?.title + " | A Brothers Shop",
+    description: product?.desc.slice(0, 100) + "...",
+    authors: { name: "Achraf Aissaoui" },
+    openGraph: {
+      url: "https://abrothers-shop.vercel.app/",
+      type: "article",
+      title: product?.title,
+      description: product?.desc.slice(0, 100) + "...",
+      images: product?.images[0]
+    }
+  }
+}
 
 async function ProductPage({ params }: { params: { id: string } }) {
   const product = await getProduct(params.id)
