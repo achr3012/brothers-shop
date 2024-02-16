@@ -5,6 +5,7 @@ import prisma from '@/lib/prisma'
 import { orderSchema, productSchema } from './zodSchema'
 import { revalidatePath } from 'next/cache'
 import { OrderDataType } from '@/components/shop/OrderForm'
+import { Status } from '@prisma/client'
 
 
 export async function createProduct(prevState: any, formData: FormData) {
@@ -63,4 +64,13 @@ export async function createOrder(data: OrderDataType, productId: string) {
 
   return order;
 
+}
+
+export async function updateStatus(id: string, status: Status) {
+  const update = await prisma.order.update({ where: { id }, data: { status } })
+  const updated = await prisma.order.findUnique({ where: { id }, select: { status: true } })
+  if (updated?.status) {
+    console.log("Wooorked")
+  }
+  return updated?.status
 }

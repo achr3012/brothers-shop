@@ -2,7 +2,7 @@ import Image from 'next/image'
 import styles from './page.module.css'
 import Link from 'next/link'
 import prisma from '@/lib/prisma'
-
+import OrderStatus from '@/components/dashboard/OrderStatus'
 
 export const dynamic = 'force-dynamic'
 export default async function OrdersPage() {
@@ -38,14 +38,7 @@ export default async function OrdersPage() {
               <div><Link href={`https://www.google.com/search?q=Code+postal+${order.commune}+${order.wilaya}`} target='_blank'>{order.commune}</Link></div>
               <div>{order.delivery}</div>
               <div>{order.createdAt.toLocaleDateString('en-GB')} {order.createdAt.toLocaleTimeString('en-GB')}</div>
-              <div className={styles.status}>
-                <select>
-                  <option>PENDING</option>
-                  <option>CONFIRMED</option>
-                  <option>CANCELED</option>
-                </select>
-                <button type="button"><Image src="/delete.jfif" width={50} height={50} alt=""></Image></button>
-              </div>
+              <OrderStatus order={order} />
             </div>
           ))
         )}
