@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { type Order, type Status } from '@prisma/client'
 
 import styles from './index.module.css'
-import { updateStatus } from '@/lib/actions'
+import { deleteOrder, updateStatus } from '@/lib/actions'
 
 const OrderStatus = ({ order }: { order: Order }) => {
   const [status, setStatus] = useState(order.status)
@@ -16,6 +16,12 @@ const OrderStatus = ({ order }: { order: Order }) => {
     setStatus(updatedStatus)
   }
 
+  const deleteHandler = async () => {
+    if (confirm("Would you want to delete this order ?") == true) {
+      await deleteOrder(order.id)
+    }
+  }
+
   return (
     <div className={styles.status}>
       <select
@@ -25,7 +31,7 @@ const OrderStatus = ({ order }: { order: Order }) => {
         <option value='PENDING'>PENDING</option>
         <option value='CANCELED'>CANCELED</option>
       </select>
-      <button type="button" title='Delete'><img src="/delete.svg" alt="" /></button>
+      <button type="button" onClick={deleteHandler} title='Delete'><img src="/delete.svg" alt="" /></button>
     </div>
   )
 }

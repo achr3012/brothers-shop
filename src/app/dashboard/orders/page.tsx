@@ -11,38 +11,41 @@ export default async function OrdersPage() {
   return (
     <>
       <h2 className="page-title">Orders (Les commandes)</h2>
-      <div className={styles.orders}>
-        <div className={`${styles.column} ${styles.head}`}>
-          <p>Product</p>
-          <p>Customer</p>
-          <p>Wilaya</p>
-          <p>Commune</p>
-          <p>Delivery</p>
-          <p>Date</p>
-          <p>Status</p>
+
+      {orders.length ? (
+        <div className={styles.orders}>
+          <div className={styles.head}>
+            <p>Product</p>
+            <p>Customer</p>
+            <p>Wilaya</p>
+            <p>Commune</p>
+            <p>Delivery</p>
+            <p>Date</p>
+            <p>Status</p>
+          </div>
+          {orders && (
+            orders.map(order => (
+              <div key={order.id} className={styles.column}>
+                <div className={styles.product}>
+                  <Link href={`/product/${order.productId}`} target='_blank'>
+                    <Image src={order.product.images[0]} width={35} height={35} alt={order.product.title} />
+                    <p>{order.product.title}</p>
+                  </Link>
+                </div>
+                <div className={styles.customer}>
+                  <p>{order.name}</p>
+                  <p>{order.phone}</p>
+                </div>
+                <div>{order.wilaya}</div>
+                <div>{order.commune == '0' ? '' : (<Link href={`https://www.google.com/search?q=Code+postal+${order.commune}+${order.wilaya}`} target='_blank'>{order.commune}</Link>)}</div>
+                <div>{order.delivery}</div>
+                <div>{order.createdAt.toLocaleDateString('en-GB')} {order.createdAt.toLocaleTimeString('en-GB')}</div>
+                <OrderStatus order={order} />
+              </div>
+            ))
+          )}
         </div>
-        {orders && (
-          orders.map(order => (
-            <div key={order.id} className={styles.column}>
-              <div className={styles.product}>
-                <Link href={`/product/${order.productId}`} target='_blank'>
-                  <Image src={order.product.images[0]} width={35} height={35} alt={order.product.title} />
-                  <p>{order.product.title}</p>
-                </Link>
-              </div>
-              <div className={styles.customer}>
-                <p>{order.name}</p>
-                <p>{order.phone}</p>
-              </div>
-              <div>{order.wilaya}</div>
-              <div><Link href={`https://www.google.com/search?q=Code+postal+${order.commune}+${order.wilaya}`} target='_blank'>{order.commune}</Link></div>
-              <div>{order.delivery}</div>
-              <div>{order.createdAt.toLocaleDateString('en-GB')} {order.createdAt.toLocaleTimeString('en-GB')}</div>
-              <OrderStatus order={order} />
-            </div>
-          ))
-        )}
-      </div>
+      ) : <p>No orders to show ):</p>}
     </>
   )
 }

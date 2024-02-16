@@ -61,16 +61,18 @@ export async function createOrder(data: OrderDataType, productId: string) {
   const order = await prisma.order.create({
     data: { ...data, productId }
   })
-
+  if (order) revalidatePath('/dashboard/orders', 'page')
   return order;
 
 }
 
 export async function updateStatus(id: string, status: Status) {
-  const update = await prisma.order.update({ where: { id }, data: { status } })
+  await prisma.order.update({ where: { id }, data: { status } })
   const updated = await prisma.order.findUnique({ where: { id }, select: { status: true } })
-  if (updated?.status) {
-    console.log("Wooorked")
-  }
   return updated?.status
+}
+
+export async function deleteOrder(id: string) {
+  const deletedOrder = await prisma.order.delete({ where: { id } })
+  if (deletedOrder) revalidatePath('/dashboard/orders', 'page')
 }

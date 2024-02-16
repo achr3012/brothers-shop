@@ -17,7 +17,7 @@
 
 .confirmed {
   border: 1px solid #198038;
-  box-shadow: 0px 0px 4px 1px rgba(25, 128, 56, 0.8);
+  box-shadow: 0px 0px 4px 1px rgb(25, 128, 56);
   /* color: #198038; */
 }
 
