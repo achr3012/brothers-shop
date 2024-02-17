@@ -1,3 +1,16 @@
-.heading {
-  color: #f05
+.footer ul {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 5px;
+  padding: 1rem;
+  background-color: rgb(0, 255, 255, 0.6);
+}
+
+.copy {
+  text-align: center;
+  padding: 1rem;
+  background: rgb(0, 255, 255);
+  font-weight: 600;
+  line-height: 1.8;
+  font-size: 15px;
 }

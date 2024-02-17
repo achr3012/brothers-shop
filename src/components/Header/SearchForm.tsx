@@ -3,7 +3,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import styles from './index.module.css'
 import { useEffect, useRef, useState } from 'react'
 
-const SearchForm = () => {
+export default function SearchForm() {
   const router = useRouter()
   const queryRef = useRef<HTMLInputElement>(null)
   const [query, setQuery] = useState('')
@@ -17,7 +17,7 @@ const SearchForm = () => {
 
   const searchHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (queryRef.current) {
+    if (queryRef.current && queryRef.current.value.trim().length > 0) {
       setQuery(queryRef.current.value)
       router.push(`/search?q=${queryRef.current.value}`)
       queryRef.current.value = ''
@@ -34,5 +34,3 @@ const SearchForm = () => {
     </form>
   )
 }
-
-export default SearchForm
