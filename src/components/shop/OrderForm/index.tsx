@@ -73,9 +73,9 @@ function OrderForm({ productId, font }: { productId: string, font: NextFont }) {
           if (nameRef.current && phoneRef.current && wilayaRef.current && communeRef.current && deliveryRef.current) {
             nameRef.current.value = ""
             phoneRef.current.value = ""
-            wilayaRef.current.value = ""
-            communeRef.current.value = ""
-            deliveryRef.current.value = ""
+            wilayaRef.current.value = "0"
+            communeRef.current.value = "0"
+            deliveryRef.current.value = "0"
           }
           setOrder(newOrder)
         })

@@ -1,13 +1,15 @@
 import Logo from '@/components/Logo'
-import classes from './index.module.css'
+import styles from './index.module.css'
+import SearchForm from './SearchForm'
 
 const data = { text: "Some breaking news Hnaaa hhh" }
 
 export default function Header() {
   return (
-    <header className={classes.header}>
-      <p className={classes.breaking}>{data.text}</p>
-      <div className={classes.logo}><Logo to="/" light /></div>
+    <header className={styles.header}>
+      <p className={styles.breaking}>{data.text}</p>
+      <div className={styles.logo}><Logo to="/" light /></div>
+      <SearchForm />
     </header>
   )
 }

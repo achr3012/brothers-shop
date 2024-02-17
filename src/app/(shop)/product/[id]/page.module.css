@@ -1,5 +1,6 @@
-.thumb img {
-  width: 100%;
+.thumb {
+  display: flex;
+  justify-content: center;
 }
 
 .info {

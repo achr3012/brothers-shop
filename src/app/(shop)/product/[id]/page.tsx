@@ -52,13 +52,13 @@ async function ProductPage({ params }: { params: { id: string } }) {
           </div>
         )}
       </div>
-      <div id="form" className={styles.formContainer}>
+      <div id="buy" className={styles.formContainer}>
         <h3 className={noto_sans_arabic.className}>معلومات الزبون</h3>
         <OrderForm productId={product.id} font={noto_sans_arabic} />
       </div>
       <div className={styles.buy}>
         <p>{product.price} دج</p>
-        <a href='#form'>Buy | شراء</a>
+        <a href='#buy'>Buy | شراء</a>
       </div>
     </>
   )
