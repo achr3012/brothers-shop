@@ -10,7 +10,7 @@ export default async function Home() {
 
   return (
     <>
-      <Suspense fallback={<p>Loading Products...</p>}>
+      <Suspense fallback={<div id="loading" />}>
         <ProductsFeed products={products} />
       </Suspense>
     </>

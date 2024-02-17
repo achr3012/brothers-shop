@@ -20,7 +20,7 @@ export default async function Search({ searchParams }: { searchParams: { [key: s
   console.log(products, query)
 
   return (
-    <Suspense fallback={<p>Loading Products...</p>}>
+    <Suspense fallback={<div id="loading" />}>
       <ProductsFeed products={products} />
     </Suspense>
   )
