@@ -1,8 +1,5 @@
 import prisma from '@/lib/prisma'
-
 import ProductsFeed from '@/components/shop/ProductsFeed'
-import styles from './page.module.css'
-import { Suspense } from 'react'
 
 export default async function Home() {
 
@@ -10,9 +7,7 @@ export default async function Home() {
 
   return (
     <>
-      <Suspense fallback={<div id="loading" />}>
-        <ProductsFeed products={products} />
-      </Suspense>
+      <ProductsFeed products={products} />
     </>
   )
 }

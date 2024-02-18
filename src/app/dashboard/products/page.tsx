@@ -33,7 +33,7 @@ export default async function Products() {
             <h3 className={classes.price}>${product.price} (DZd)</h3>
 
             <div className={classes.actions}>
-              <Link href={`edit-product/${product.id}`}>Edit</Link>
+              <Link href={`edit-product?id=${product.id}`}>Edit</Link>
               <button>Delete</button>
             </div>
           </div>

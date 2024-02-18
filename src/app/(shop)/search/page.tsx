@@ -1,7 +1,6 @@
 import { redirect } from "next/navigation"
 import prisma from '@/lib/prisma'
 import ProductsFeed from "@/components/shop/ProductsFeed"
-import { Suspense } from "react"
 
 export default async function Search({ searchParams }: { searchParams: { [key: string]: string | undefined } }) {
   const query = searchParams.q
@@ -18,9 +17,10 @@ export default async function Search({ searchParams }: { searchParams: { [key: s
   })
 
   return (
-    <Suspense fallback={<div id="loading" />}>
+    <>
+      <p style={{ padding: '1rem' }}>Searching for: <b>{query}</b></p>
       <ProductsFeed products={products} />
-    </Suspense>
+    </>
   )
 }
 

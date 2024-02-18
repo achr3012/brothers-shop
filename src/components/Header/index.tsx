@@ -8,8 +8,10 @@ export default function Header() {
   return (
     <header className={styles.header}>
       <p className={styles.breaking}>{data.text}</p>
-      <div className={styles.logo}><Logo to="/" light /></div>
-      <SearchForm />
+      <div className={styles.flex}>
+        <div className={styles.logo}><Logo to="/" light /></div>
+        <SearchForm />
+      </div>
     </header>
   )
 }

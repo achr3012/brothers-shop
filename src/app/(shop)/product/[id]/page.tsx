@@ -7,7 +7,7 @@ import OrderForm from '@/components/shop/OrderForm'
 import type { Metadata, ResolvingMetadata } from 'next'
 import styles from './page.module.css'
 import { Noto_Sans_Arabic } from 'next/font/google'
-const noto_sans_arabic = Noto_Sans_Arabic({
+export const noto_sans_arabic = Noto_Sans_Arabic({
   weight: ['400', '600'],
   subsets: ['arabic']
 })
