@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 import { Noto_Sans } from 'next/font/google'
 const noto_sans = Noto_Sans({
-  weight: ['300', '400', '600', '800'],
+  weight: ['300', '400', '600'],
   subsets: ['latin']
 })
 

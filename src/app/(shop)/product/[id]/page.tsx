@@ -4,7 +4,7 @@ import prisma from '@/lib/prisma'
 import { getProduct } from "@/lib/dbQueries"
 import OrderForm from '@/components/shop/OrderForm'
 
-import type { Metadata, ResolvingMetadata } from 'next'
+import type { Metadata } from 'next'
 import styles from './page.module.css'
 import { Noto_Sans_Arabic } from 'next/font/google'
 export const noto_sans_arabic = Noto_Sans_Arabic({

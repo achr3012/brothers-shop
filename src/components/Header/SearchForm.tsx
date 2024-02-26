@@ -22,7 +22,7 @@ export default function SearchForm() {
 
   return (
     <form onSubmit={searchHandler} className={styles.searchForm}>
-      <input className={opened ? styles.show : ''} ref={queryRef} type='search' name='keywords' placeholder='Search here...' />
+      <input className={opened ? styles.show : ''} ref={queryRef} type='search' name='keywords' placeholder='ابحث هنا...' />
       <button type='button' onClick={() => setOpened(!opened)} title='search'><img src='/search.svg' alt='Serach' /></button>
     </form>
   )
