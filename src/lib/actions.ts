@@ -16,7 +16,8 @@ export async function createProduct(prevState: any, formData: FormData) {
     desc: formData.get('desc') as string,
     images: formData.get("images") as string,
     price: Number(formData.get("price")),
-    publish: (formData.get("publish") == "true")
+    publish: (formData.get("publish") == "true"),
+    categoryId: parseInt(formData.get("category") as string)
   }
 
   const validatedFields = productSchema.safeParse(d)
@@ -42,14 +43,12 @@ export async function createProduct(prevState: any, formData: FormData) {
       desc: d.desc,
       price: d.price,
       images,
-      published: d.publish
+      published: d.publish,
+      categoryId: d.categoryId
     }
   })
 
-  revalidatePath('/dashboard')
-  revalidatePath('/dashboard/products')
   redirect(`/dashboard/?newProduct=${product.id}`)
-
 }
 
 export async function createOrder(data: OrderDataType, productId: string) {

@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { createProduct } from '@/lib/actions'
 import { UploadButton } from '@/lib/uploadthing'
 import classes from './index.module.css'
+import { Category } from '@prisma/client'
 
 const initialState: {
   errors: {
@@ -19,10 +20,11 @@ const initialState: {
   errors: {}
 }
 
-export default function CreateProductForm() {
+export default function CreateProductForm({ categories }: { categories: Category[] }) {
   const [uploadedImages, setUploadedImages] = useState<string[]>([])
   const [imagesError, setImagesError] = useState("")
   const [formSubmitted, setFormSubmitted] = useState(false)
+  const [category, setCategory] = useState(0)
   const [state, formAction] = useFormState(createProduct, initialState)
   const { pending } = useFormStatus()
 
@@ -69,6 +71,23 @@ export default function CreateProductForm() {
         </ul>
       )}
 
+      <h4>Select category</h4>
+      <ul className={classes.categories}>
+        <li
+          onClick={() => setCategory(0)}
+          className={category === 0 ? classes.selectedCategory : ''}>
+          Uncategorized
+        </li>
+        {categories.map(cate => (
+          <li
+            key={cate.id}
+            onClick={() => setCategory(cate.id)}
+            className={cate.id === category ? classes.selectedCategory : ''}>
+            {cate.name}
+          </li>
+        ))}
+      </ul>
+
       <div className={classes.formGroup}>
         <label htmlFor="price">Price (DZD)</label>
         <input type='number' name='price' id='price' placeholder='14 Mlyoun 😄' />
@@ -78,10 +97,10 @@ export default function CreateProductForm() {
       <div className={classes.formGroup}>
         <input type='checkbox' name='publish' id='publish' value="true" />
         <label htmlFor="publish">Publish on site</label>
-
       </div>
 
       <input type="hidden" name="images" value={uploadedImages} />
+      <input type="hidden" name="category" value={category} />
 
       <button type='submit' className={classes.submit} aria-disabled={pending} disabled={pending}>Submit</button>
     </form>

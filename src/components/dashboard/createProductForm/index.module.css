@@ -105,6 +105,24 @@
   margin-top: 10px;
 }
 
+.categories {
+  display: flex;
+  gap: 8px;
+  margin-top: -8px;
+}
+
+.categories li {
+  cursor: pointer;
+  padding: 4px 8px;
+  border: 2px solid rgba(128, 128, 128, 0.6);
+  border-radius: 8px;
+}
+
+.selectedCategory {
+  color: #00ffff;
+  border-color: #00ffff !important;
+}
+
 @media (prefers-color-scheme: dark) {
   .form {
     background-color: #222;

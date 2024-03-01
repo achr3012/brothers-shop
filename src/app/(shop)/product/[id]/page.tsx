@@ -17,7 +17,6 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   return {
     title: product?.title + " | A Brothers Shop",
     description: product?.desc.slice(0, 100) + "...",
-    authors: { name: "Achraf Aissaoui" },
     openGraph: {
       url: "https://abrothers-shop.vercel.app/",
       type: "article",

@@ -1,3 +1,4 @@
+import prisma from '@/lib/prisma'
 import type { Metadata } from "next";
 import CreateProductForm from "@/components/dashboard/createProductForm";
 
@@ -6,11 +7,12 @@ export const metadata: Metadata = {
   description: 'Create a new Product | Dashboard | Brothers Shop',
 }
 
-export default function AddProduct() {
+export default async function AddProduct() {
+  const categories = await prisma.category.findMany({ orderBy: { products: { _count: 'asc' } } })
   return (
     <>
       <h2 className="page-title">Create a new Product</h2>
-      <CreateProductForm />
+      <CreateProductForm categories={categories} />
     </>
   )
 }

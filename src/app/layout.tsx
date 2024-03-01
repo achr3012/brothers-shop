@@ -5,6 +5,14 @@ import './globals.css'
 export const metadata: Metadata = {
   title: 'Brothers Shop',
   description: 'Brothers Shop',
+  authors: { name: "Achraf Aissaoui" },
+  openGraph: {
+    url: "https://abrothers-shop.vercel.app/",
+    type: "article",
+    title: 'Brothers Shop',
+    description: 'Brothers Shop',
+    images: '/logo.svg'
+  }
 }
 
 import { Noto_Sans } from 'next/font/google'
