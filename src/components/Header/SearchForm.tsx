@@ -1,7 +1,6 @@
 "use client"
 
 import { useRouter } from 'next/navigation'
-import styles from './index.module.css'
 import { useRef, useState } from 'react'
 
 export default function SearchForm() {
@@ -21,8 +20,8 @@ export default function SearchForm() {
 
 
   return (
-    <form onSubmit={searchHandler} className={styles.searchForm}>
-      <input className={opened ? styles.show : ''} ref={queryRef} type='search' name='keywords' placeholder='ابحث هنا...' />
+    <form onSubmit={searchHandler}>
+      <input style={opened ? { display: 'block' } : {}} ref={queryRef} type='search' name='keywords' placeholder='ابحث هنا...' />
       <button type='button' onClick={() => setOpened(!opened)} title='search'><img src='/search.svg' alt='Serach' /></button>
     </form>
   )

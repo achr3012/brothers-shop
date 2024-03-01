@@ -76,3 +76,17 @@ export async function deleteOrder(id: string) {
   const deletedOrder = await prisma.order.delete({ where: { id } })
   if (deletedOrder) revalidatePath('/dashboard/orders', 'page')
 }
+
+export async function deleteCategory(id: number) {
+  const deletedOrder = await prisma.category.delete({ where: { id } })
+  if (deletedOrder) revalidatePath('/dashboard/categories', 'page')
+}
+
+export async function addCategory(formData: FormData) {
+  const name = formData.get("cateName") as string
+  if (!name) return false
+  const cateExists = await prisma.category.findUnique({ where: { name } })
+  if (cateExists) return false
+  await prisma.category.create({ data: { name } })
+  revalidatePath('/dashboard/categories', 'page')
+}

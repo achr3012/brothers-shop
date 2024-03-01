@@ -11,14 +11,16 @@ datasource db {
 }
 
 model Product {
-  id        String   @id @default(cuid())
-  title     String
-  desc      String
-  images    String[]
-  price     Int
-  published Boolean  @default(false)
-  orders    Order[]
-  createdAt DateTime @default(now())
+  id         String    @id @default(cuid())
+  title      String
+  desc       String
+  images     String[]
+  price      Int
+  published  Boolean   @default(false)
+  orders     Order[]
+  categoryId Int?
+  category   Category? @relation(fields: [categoryId], references: [id])
+  createdAt  DateTime  @default(now())
 }
 
 model Order {
@@ -38,4 +40,10 @@ enum Status {
   PENDING
   CONFIRMED
   CANCELED
+}
+
+model Category {
+  id       Int       @id @default(autoincrement())
+  name     String    @unique
+  products Product[]
 }

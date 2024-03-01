@@ -1,0 +1,69 @@
+.categories > div {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  border-left: 8px solid #00ffff;
+  margin-bottom: 1rem;
+  padding: 6px 1rem;
+}
+
+.categories > div h3 p {
+  font-size: 13px;
+  font-weight: 400;
+  opacity: 0.5;
+}
+
+.categories > div button {
+  width: 30px;
+  height: 30px;
+  font-weight: bold;
+  font-size: 18px;
+  cursor: pointer;
+  background: none;
+  border: 2px solid rgb(255 0 0 / 60%);
+  border-radius: 4px;
+  transition: 0.3s ease-in-out;
+}
+
+.categories > div button:hover {
+  background: rgb(255 0 0 / 50%);
+}
+
+.addCategory {
+  margin-bottom: 1.5rem;
+}
+
+.addCategory input {
+  padding: 10px;
+  border: 1px solid rgb(128, 128, 128, 0.6);
+  border-radius: 6px;
+  margin-right: 1rem;
+  outline: none;
+  font-size: 14px;
+  transition: 0.2s ease-out;
+}
+
+.addCategory input:focus {
+  border-color: #00ffff;
+}
+
+.addCategory button {
+  cursor: pointer;
+  padding: 6px 8px;
+  border: 2px solid aqua;
+  background: none;
+  border-radius: 6px;
+  font-family: inherit;
+  font-weight: 600;
+  transition: 0.2s ease-out;
+}
+
+.addCategory button:hover {
+  background-color: #00ffff;
+}
+
+.addCategory p {
+  margin-top: 6px;
+  font-size: 14px;
+  opacity: 0.6;
+}
