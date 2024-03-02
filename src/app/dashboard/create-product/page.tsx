@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 }
 
 export default async function AddProduct() {
-  const categories = await prisma.category.findMany({ orderBy: { products: { _count: 'asc' } } })
+  const categories = await prisma.category.findMany({ orderBy: { id: 'desc' } })
   return (
     <>
       <h2 className="page-title">Create a new Product</h2>
