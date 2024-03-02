@@ -3,6 +3,7 @@ import styles from './index.module.css'
 import SearchForm from './SearchForm'
 import { noto_sans_arabic } from '@/app/(shop)/product/[id]/page'
 import Navbar from './Navbar'
+import Carousel from './Carousel'
 
 export default function Header() {
   // "الدفع عند الاستلام، اسرع واطلب الآن"
@@ -19,6 +20,7 @@ export default function Header() {
       <nav className={styles.nav}>
         <Navbar />
       </nav>
+      <Carousel />
     </header>
   )
 }
