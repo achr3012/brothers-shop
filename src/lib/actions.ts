@@ -78,7 +78,7 @@ export async function deleteOrder(id: string) {
 
 export async function deleteCategory(id: number) {
   const deletedOrder = await prisma.category.delete({ where: { id } })
-  if (deletedOrder) revalidatePath('/dashboard/categories', 'page')
+  if (deletedOrder) revalidatePath('/dashboard/create-product', 'page')
 }
 
 export async function addCategory(formData: FormData) {
@@ -88,4 +88,5 @@ export async function addCategory(formData: FormData) {
   if (cateExists) return false
   await prisma.category.create({ data: { name } })
   revalidatePath('/dashboard/categories', 'page')
+  revalidatePath('/dashboard/create-product', 'page')
 }
