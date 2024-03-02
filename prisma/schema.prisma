@@ -47,3 +47,9 @@ model Category {
   name     String    @unique
   products Product[]
 }
+
+model Settings {
+  id               Int      @id
+  headerText       String?
+  carouselProducts String[]
+}

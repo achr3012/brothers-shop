@@ -74,6 +74,19 @@
   font-size: 16px;
 }
 
+.carousel > div {
+  overflow: hidden;
+}
+
+.carousel > div > div {
+  display: flex;
+}
+
+.carousel > div > div > div {
+  flex: 0 0 100%;
+  min-width: 0;
+}
+
 @media (prefers-color-scheme: dark) {
   .searchForm form input {
     background-color: #111;

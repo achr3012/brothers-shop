@@ -1,3 +1,4 @@
+import prisma from '@/lib/prisma'
 import Logo from '@/components/Logo'
 import styles from './index.module.css'
 import SearchForm from './SearchForm'
@@ -5,12 +6,31 @@ import { noto_sans_arabic } from '@/app/(shop)/product/[id]/page'
 import Navbar from './Navbar'
 import Carousel from './Carousel'
 
-export default function Header() {
-  // "الدفع عند الاستلام، اسرع واطلب الآن"
-  const data = { text: "" }
+type SettingsType = {
+  headerText: string,
+  carouselProducts: string[]
+}
+
+export default async function Header() {
+  const settings = await prisma.settings.findUnique({ where: { id: 1 }, select: { headerText: true, carouselProducts: true } }) as SettingsType
+  const carouselProducts = await prisma.product.findMany({
+    where: {
+      AND: {
+        id: { in: settings.carouselProducts },
+        published: true
+      }
+    },
+    select: {
+      id: true,
+      title: true,
+      images: true,
+      price: true
+    }
+  })
+
   return (
     <header className={styles.header}>
-      {data.text && <p className={`${styles.breaking} ${noto_sans_arabic.className}`}>{data.text}</p>}
+      {settings.headerText && <p className={`${styles.breaking} ${noto_sans_arabic.className}`}>{settings.headerText}</p>}
       <div className={styles.flex}>
         <div className={styles.logo}><Logo to="/" light /></div>
         <div className={styles.searchForm}>
@@ -20,7 +40,9 @@ export default function Header() {
       <nav className={styles.nav}>
         <Navbar />
       </nav>
-      <Carousel />
+      <div className={styles.carousel}>
+        <Carousel products={carouselProducts} />
+      </div>
     </header>
   )
 }
