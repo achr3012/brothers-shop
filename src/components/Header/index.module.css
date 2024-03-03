@@ -87,6 +87,17 @@
   min-width: 0;
 }
 
+.carousel > div > div > div > div > div {
+  height: 433px;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.2em;
+}
+
 @media (prefers-color-scheme: dark) {
   .searchForm form input {
     background-color: #111;

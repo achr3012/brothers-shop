@@ -3,6 +3,7 @@
 import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
 import { usePathname } from 'next/navigation'
+import Link from 'next/link';
 interface Product {
   id: string;
   title: string;
@@ -20,7 +21,12 @@ const Carousel = ({ products }: { products: Product[] }) => {
       <div>
         {products.map(product => (
           <div key={product.id}>
-            {product.title}
+            <div style={{ background: `url('${product.images[0]}') center / cover` }}>
+              <div>
+                <h3><Link href={`/product/${product.id}`}>{product.title}</Link></h3>
+                <h4>{product.price} DzD</h4>
+              </div>
+            </div>
           </div>
         ))}
       </div>
