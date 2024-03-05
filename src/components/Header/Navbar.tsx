@@ -8,7 +8,6 @@ export default async function Navbar() {
       {categories.length > 0 && categories.map(cate => (
         <li key={cate.name}><Link href={`/category/${cate.name}`}>{cate.name}</Link></li>
       ))}
-      <li><Link href={`/category/uncategorized`}>Uncategorized</Link></li>
     </ul>
   )
 }

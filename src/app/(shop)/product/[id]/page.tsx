@@ -1,10 +1,9 @@
+import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import prisma from '@/lib/prisma'
-import { getProduct } from "@/lib/dbQueries"
 import OrderForm from '@/components/shop/OrderForm'
 
-import type { Metadata } from 'next'
 import styles from './page.module.css'
 import { Noto_Sans_Arabic } from 'next/font/google'
 export const noto_sans_arabic = Noto_Sans_Arabic({
@@ -12,6 +11,12 @@ export const noto_sans_arabic = Noto_Sans_Arabic({
   subsets: ['arabic']
 })
 
+export async function generateStaticParams() {
+  const products = await prisma.product.findMany()
+  return products.map((product) => ({
+    id: product.id,
+  }))
+}
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
   const product = await prisma.product.findUnique({ where: { id: params.id }, select: { title: true, desc: true, images: true } })
   return {
@@ -28,7 +33,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
 }
 
 async function ProductPage({ params }: { params: { id: string } }) {
-  const product = await getProduct(params.id)
+  const product = await prisma.product.findUnique({ where: { id: params.id } })
   if (!product) notFound()
   // Remove the first item (I displayed it as thumbnail)
   const [, ...photos] = product.images;

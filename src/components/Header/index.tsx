@@ -12,11 +12,15 @@ type SettingsType = {
 }
 
 export default async function Header() {
-  const settings = await prisma.settings.findUnique({ where: { id: 1 }, select: { headerText: true, carouselProducts: true } }) as SettingsType
-  const carouselProducts = await prisma.product.findMany({
+  const { headerText, carouselProducts } = await prisma.settings.findUnique({
+    where: { id: 1 },
+    select: { headerText: true, carouselProducts: true }
+  }) as SettingsType
+
+  const carouselProductsArr = await prisma.product.findMany({
     where: {
       AND: {
-        id: { in: settings.carouselProducts },
+        id: { in: carouselProducts },
         published: true
       }
     },
@@ -25,12 +29,14 @@ export default async function Header() {
       title: true,
       images: true,
       price: true
-    }
+    },
+    orderBy: { id: 'desc' },
+    take: 4
   })
 
   return (
     <header className={styles.header}>
-      {settings.headerText && <p className={`${styles.breaking} ${noto_sans_arabic.className}`}>{settings.headerText}</p>}
+      {headerText && <p className={`${styles.breaking} ${noto_sans_arabic.className}`}>{headerText}</p>}
       <div className={styles.flex}>
         <div className={styles.logo}><Logo to="/" light /></div>
         <div className={styles.searchForm}>
@@ -41,7 +47,7 @@ export default async function Header() {
         <Navbar />
       </nav>
       <div className={styles.carousel}>
-        <Carousel products={carouselProducts} />
+        <Carousel products={carouselProductsArr} />
       </div>
     </header>
   )

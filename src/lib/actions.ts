@@ -90,3 +90,8 @@ export async function addCategory(formData: FormData) {
   revalidatePath('/dashboard/categories', 'page')
   revalidatePath('/dashboard/create-product', 'page')
 }
+
+export async function deleteProductById(id: string) {
+  const deletedProduct = await prisma.product.delete({ where: { id } })
+  if (deletedProduct) revalidatePath('/dashboard/products', 'page')
+}

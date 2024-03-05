@@ -11,9 +11,10 @@ export default async function Search({ searchParams }: { searchParams: { [key: s
       published: true,
       OR: [
         { title: { contains: query, mode: 'insensitive' } },
-        { desc: { contains: query, mode: 'insensitive' } }
+        { desc: { contains: query, mode: 'insensitive' } },
+        { category: { name: { contains: query, mode: 'insensitive' } } }
       ]
-    }
+    }, include: { category: { select: { name: true } } }, orderBy: { id: "desc" }
   })
 
   return (

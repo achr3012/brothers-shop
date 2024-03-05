@@ -69,6 +69,26 @@ ul {
   -webkit-animation: spin 1s ease-in-out infinite;
 }
 
+.not-found {
+  direction: rtl;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.not-found h1 {
+  font-family: sans-serif;
+}
+
+.not-found .back a {
+  color: #00ffff;
+  font-size: 16px;
+  font-weight: bold;
+}
+
 @keyframes spin {
   to {
     -webkit-transform: rotate(360deg);
@@ -77,16 +97,5 @@ ul {
 @-webkit-keyframes spin {
   to {
     -webkit-transform: rotate(360deg);
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-
-  body {
-    color: #fff;
-    background-color: #111;
   }
 }

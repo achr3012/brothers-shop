@@ -1,7 +1,20 @@
-import { Product } from "@prisma/client";
 import styles from './index.module.css'
 import Image from "next/image";
 import Link from "next/link";
+
+interface Product {
+  category: {
+    name: string;
+  };
+  id: string;
+  title: string;
+  desc: string;
+  images: string[];
+  price: number;
+  published: boolean;
+  categoryId: number | null;
+  createdAt: Date;
+}
 
 export default function ProductsFeed({ products }: { products: Product[] }) {
   return (
@@ -16,6 +29,9 @@ export default function ProductsFeed({ products }: { products: Product[] }) {
             </div>
             <div className={styles.content}>
               <h2 className={styles.title}><Link href={`/product/${product.id}`}>{product.title}</Link></h2>
+              <p className={styles.price}>
+                <Link href={`/category/${product.category.name}`}>{product.category.name}</Link>
+              </p>
               <p className={styles.price}>{product.price} DzD</p>
               <div className={styles.buy}>
                 <Link href={`/product/${product.id}#buy`}>Buy ~ شراء</Link>
@@ -23,7 +39,7 @@ export default function ProductsFeed({ products }: { products: Product[] }) {
             </div>
           </div>
         ))}</>
-      ) : <p>No posts to show</p>}
+      ) : <p>No Products to show</p>}
     </div>
   )
 }

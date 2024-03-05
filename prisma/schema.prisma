@@ -11,16 +11,16 @@ datasource db {
 }
 
 model Product {
-  id         String    @id @default(cuid())
+  id         String   @id @default(cuid())
   title      String
   desc       String
   images     String[]
   price      Int
-  published  Boolean   @default(false)
+  published  Boolean  @default(false)
   orders     Order[]
-  categoryId Int?
-  category   Category? @relation(fields: [categoryId], references: [id])
-  createdAt  DateTime  @default(now())
+  categoryId Int
+  category   Category @relation(fields: [categoryId], references: [id])
+  createdAt  DateTime @default(now())
 }
 
 model Order {
@@ -30,7 +30,7 @@ model Order {
   wilaya    String
   commune   String
   delivery  String
-  product   Product  @relation(fields: [productId], references: [id])
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
   productId String
   status    Status   @default(PENDING)
   createdAt DateTime @default(now())

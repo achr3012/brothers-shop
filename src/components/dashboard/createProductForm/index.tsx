@@ -73,11 +73,6 @@ export default function CreateProductForm({ categories }: { categories: Category
 
       <h4>Select category</h4>
       <ul className={classes.categories}>
-        <li
-          onClick={() => setCategory(0)}
-          className={category === 0 ? classes.selectedCategory : ''}>
-          Uncategorized
-        </li>
         {categories.map(cate => (
           <li
             key={cate.id}
