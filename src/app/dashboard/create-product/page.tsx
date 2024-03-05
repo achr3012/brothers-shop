@@ -1,6 +1,6 @@
 import prisma from '@/lib/prisma'
 import type { Metadata } from "next";
-import CreateProductForm from "@/components/dashboard/CreateProductForm";
+import CreateProductForm from "@/components/dashboard/CreateProductForm/index";
 
 export const metadata: Metadata = {
   title: 'Create a new Product | Dashboard | Brothers Shop',

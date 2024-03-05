@@ -20,7 +20,7 @@ const initialState: {
   errors: {}
 }
 
-export default function CreateProductForm({ categories }: { categories: Category[] }) {
+const CreateProductForm = ({ categories }: { categories: Category[] }) => {
   const [uploadedImages, setUploadedImages] = useState<string[]>([])
   const [imagesError, setImagesError] = useState("")
   const [formSubmitted, setFormSubmitted] = useState(false)
@@ -101,3 +101,5 @@ export default function CreateProductForm({ categories }: { categories: Category
     </form>
   )
 }
+
+export default CreateProductForm;
