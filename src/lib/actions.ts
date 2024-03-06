@@ -51,6 +51,11 @@ export async function createProduct(prevState: any, formData: FormData) {
   redirect(`/dashboard/?newProduct=${product.id}`)
 }
 
+export async function updateProduct(formData: FormData) {
+  const images = formData.get("images")
+  console.log(images)
+}
+
 export async function createOrder(data: OrderDataType, productId: string) {
 
   if (!orderSchema.safeParse({ ...data, productId })) {

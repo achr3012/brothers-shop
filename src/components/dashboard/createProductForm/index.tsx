@@ -1,12 +1,11 @@
 "use client"
 
-import { useEffect, useState } from 'react'
 import { useFormState, useFormStatus } from 'react-dom'
-import Image from 'next/image'
-import { createProduct } from '@/lib/actions'
-import { UploadButton } from '@/lib/uploadthing'
-import classes from './index.module.css'
 import { Category } from '@prisma/client'
+import { createProduct } from '@/lib/actions'
+import classes from './index.module.css'
+import SelectCategory from './SelectCategory'
+import UploadImages from './UploadImages'
 
 const initialState: {
   errors: {
@@ -20,30 +19,18 @@ const initialState: {
   errors: {}
 }
 
-const CreateProductForm = ({ categories }: { categories: Category[] }) => {
-  const [uploadedImages, setUploadedImages] = useState<string[]>([])
-  const [imagesError, setImagesError] = useState("")
-  const [formSubmitted, setFormSubmitted] = useState(false)
-  const [category, setCategory] = useState(0)
+export default function CreateProductForm({ categories }: { categories: Category[] }) {
   const [state, formAction] = useFormState(createProduct, initialState)
   const { pending } = useFormStatus()
 
-  useEffect(() => {
-    if (formSubmitted) {
-      uploadedImages.length ? setImagesError("") : setImagesError("Please insert at least one image")
-    }
-  }, [uploadedImages, formSubmitted])
-
-  const handelSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handelSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setFormSubmitted(true)
-    if (uploadedImages.length == 0) return
-
     const formData = new FormData(e.currentTarget as HTMLFormElement)
     formAction(formData)
   }
+
   return (
-    <form onSubmit={handelSubmit} action={formAction} className={classes.form}>
+    <form onSubmit={handelSubmit} className={classes.form}>
       <div className={classes.formGroup}>
         <label htmlFor="title">Product Title</label>
         <input type='text' name='title' id='title' placeholder='IPhone 15Pro Max' />
@@ -56,32 +43,13 @@ const CreateProductForm = ({ categories }: { categories: Category[] }) => {
         {state.errors.desc && <p className={classes.error}>{state.errors.desc[0]}</p>}
       </div>
 
-      <UploadButton
-        className={classes.uploadButton}
-        endpoint="imagesUploader"
-        onClientUploadComplete={(res) => res.map(img => setUploadedImages([...uploadedImages, img.url]))}
-        onUploadError={(error: Error) => alert(`ERROR! ${error.message}`)}
-      />
+      <div className={classes.uploadedImages}>
+        <UploadImages images={[]} />
+      </div>
 
-      {imagesError && <p className={classes.error}>{imagesError}</p>}
-
-      {uploadedImages.length > 0 && (
-        <ul className={classes.uploadedImages}>
-          {uploadedImages.map(url => <li key={url}><Image src={url} width={120} height={120} alt="product" /></li>)}
-        </ul>
-      )}
-
-      <h4>Select category</h4>
-      <ul className={classes.categories}>
-        {categories.map(cate => (
-          <li
-            key={cate.id}
-            onClick={() => setCategory(cate.id)}
-            className={cate.id === category ? classes.selectedCategory : ''}>
-            {cate.name}
-          </li>
-        ))}
-      </ul>
+      <div className={classes.selectCategories}>
+        <SelectCategory categories={categories} initialCategory={{ name: "Uncategorized", id: 0 }} />
+      </div>
 
       <div className={classes.formGroup}>
         <label htmlFor="price">Price (DZD)</label>
@@ -94,12 +62,7 @@ const CreateProductForm = ({ categories }: { categories: Category[] }) => {
         <label htmlFor="publish">Publish on site</label>
       </div>
 
-      <input type="hidden" name="images" value={uploadedImages} />
-      <input type="hidden" name="category" value={category} />
-
       <button type='submit' className={classes.submit} aria-disabled={pending} disabled={pending}>Submit</button>
     </form>
   )
 }
-
-export default CreateProductForm;

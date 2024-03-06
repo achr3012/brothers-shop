@@ -45,6 +45,7 @@
   resize: vertical;
   max-height: 220px;
   min-height: 120px;
+  direction: rtl;
 }
 
 .formGroup input[type="number"] {
@@ -76,20 +77,41 @@
   background: aqua;
 }
 
-.uploadedImages {
+.uploadedImages > ul {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
+  margin-top: 10px;
 }
 
-.uploadButton {
+.uploadedImages > ul li {
+  position: relative;
+}
+
+.uploadedImages > ul li button {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  cursor: pointer;
+  padding: 0px 6px;
+  font-size: 20px;
+}
+
+.uploadedImages > div {
   justify-content: flex-start;
   flex-direction: row;
   gap: 10px;
 }
 
-.uploadButton label {
+.uploadedImages > div label {
   color: #fff;
+}
+
+.uploadedImages > button {
+  cursor: pointer;
+  margin-top: 1rem;
+  padding: 3px 5px;
+  font-size: 16px;
 }
 
 .error {
@@ -105,22 +127,17 @@
   margin-top: 10px;
 }
 
-.categories {
+.selectCategories ul {
   display: flex;
   gap: 8px;
-  margin-top: -8px;
+  margin-top: 6px;
 }
 
-.categories li {
+.selectCategories ul li {
   cursor: pointer;
   padding: 4px 8px;
   border: 2px solid rgba(128, 128, 128, 0.6);
   border-radius: 8px;
-}
-
-.selectedCategory {
-  color: #00ffff;
-  border-color: #00ffff !important;
 }
 
 @media (prefers-color-scheme: dark) {
