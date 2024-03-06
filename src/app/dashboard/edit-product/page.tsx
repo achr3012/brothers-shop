@@ -1,8 +1,8 @@
 import prisma from '@/lib/prisma'
-import classes from '@/components/dashboard/CreateProductForm/index.module.css'
-import SelectCategory from '@/components/dashboard/CreateProductForm/SelectCategory'
+import classes from '@/components/dashboard/createProductForm/index.module.css'
 import { updateProduct } from '@/lib/actions'
-import UploadImages from '@/components/dashboard/CreateProductForm/UploadImages'
+import UploadImages from '@/components/dashboard/createProductForm/UploadImages'
+import SelectCategory from '@/components/dashboard/createProductForm/SelectCategory'
 
 export default async function EditProduct({ searchParams }: { searchParams: { [key: string]: string } }) {
   const product = await prisma.product.findUnique({ where: { id: searchParams.id }, include: { category: { select: { name: true, id: true } } } })

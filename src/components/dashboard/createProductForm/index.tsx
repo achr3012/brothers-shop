@@ -4,8 +4,8 @@ import { useFormState, useFormStatus } from 'react-dom'
 import { Category } from '@prisma/client'
 import { createProduct } from '@/lib/actions'
 import classes from './index.module.css'
-import SelectCategory from './SelectCategory'
 import UploadImages from './UploadImages'
+import SelectCategory from './SelectCategory'
 
 const initialState: {
   errors: {
