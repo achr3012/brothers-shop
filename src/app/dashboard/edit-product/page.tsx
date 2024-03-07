@@ -3,14 +3,17 @@ import classes from '@/components/dashboard/createProductForm/index.module.css'
 import { updateProduct } from '@/lib/actions'
 import UploadImages from '@/components/dashboard/createProductForm/UploadImages'
 import SelectCategory from '@/components/dashboard/createProductForm/SelectCategory'
+import { SubmitButton } from '@/components/dashboard/createProductForm/SubmitButton'
 
 export default async function EditProduct({ searchParams }: { searchParams: { [key: string]: string } }) {
   const product = await prisma.product.findUnique({ where: { id: searchParams.id }, include: { category: { select: { name: true, id: true } } } })
   const categories = await prisma.category.findMany()
   if (!product) return
 
+  const updateProductAction = updateProduct.bind(null, product)
+
   return (
-    <form action={updateProduct} className={classes.form}>
+    <form action={updateProductAction} className={classes.form}>
       <div className={classes.formGroup}>
         <label htmlFor="title">Product Title</label>
         <input type='text' name='title' id='title' placeholder='Title of title Product' defaultValue={product.title} />
@@ -31,7 +34,7 @@ export default async function EditProduct({ searchParams }: { searchParams: { [k
 
       <div className={classes.formGroup}>
         <label htmlFor="price">Price (DZD)</label>
-        <input type='number' name='price' id='price' placeholder='14 Mlyoun 😄' defaultValue={product.price} />
+        <input type='number' name='price' id='price' placeholder='2002 😄' defaultValue={product.price} />
       </div>
 
       <div className={classes.formGroup}>
@@ -39,7 +42,7 @@ export default async function EditProduct({ searchParams }: { searchParams: { [k
         <label htmlFor="publish">Publish on site</label>
       </div>
 
-      <button type='submit' className={classes.submit}>Submit</button>
+      <SubmitButton>Update</SubmitButton>
     </form>
   )
 }

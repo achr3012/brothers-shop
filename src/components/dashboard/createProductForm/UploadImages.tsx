@@ -15,7 +15,7 @@ export default function UploadImages({ images }: { images: string[] }) {
         onUploadError={(error: Error) => alert(`ERROR! ${error.message}`)}
       />
 
-      {uploadedImages.length > 0 ? (
+      {uploadedImages.length > 0 && (
         <ul>
           {uploadedImages.map(url => (
             <li key={url}>
@@ -24,7 +24,10 @@ export default function UploadImages({ images }: { images: string[] }) {
             </li>
           ))}
         </ul>
-      ) : <button type="button" onClick={() => setUploadedImages(images)}>Restore images</button>}
+      )}
+      {uploadedImages.length == 0 && images.length > 0 && (
+        <button type="button" onClick={() => setUploadedImages(images)}>Restore images</button>
+      )}
       <input type="hidden" name="images" value={uploadedImages} />
     </>
   )

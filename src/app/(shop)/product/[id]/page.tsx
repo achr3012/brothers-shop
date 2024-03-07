@@ -11,12 +11,8 @@ export const noto_sans_arabic = Noto_Sans_Arabic({
   subsets: ['arabic']
 })
 
-export async function generateStaticParams() {
-  const products = await prisma.product.findMany()
-  return products.map((product) => ({
-    id: product.id,
-  }))
-}
+export const revalidate = 3600 // revalidate at most every hour
+
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
   const product = await prisma.product.findUnique({ where: { id: params.id }, select: { title: true, desc: true, images: true } })
   return {
@@ -32,7 +28,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   }
 }
 
-async function ProductPage({ params }: { params: { id: string } }) {
+export default async function ProductPage({ params }: { params: { id: string } }) {
   const product = await prisma.product.findUnique({ where: { id: params.id } })
   if (!product) notFound()
   // Remove the first item (I displayed it as thumbnail)
@@ -67,5 +63,3 @@ async function ProductPage({ params }: { params: { id: string } }) {
     </>
   )
 }
-
-export default ProductPage;

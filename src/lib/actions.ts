@@ -9,51 +9,82 @@ import { Status } from '@prisma/client'
 
 
 export async function createProduct(prevState: any, formData: FormData) {
-
+  const formImages = formData.get('images') as string
   // data => formData
   const d = {
     title: formData.get('title') as string,
     desc: formData.get('desc') as string,
-    images: formData.get("images") as string,
+    images: [formImages],
     price: Number(formData.get("price")),
-    publish: (formData.get("publish") == "true"),
+    published: (formData.get("publish") == "true"),
     categoryId: parseInt(formData.get("category") as string)
   }
 
   const validatedFields = productSchema.safeParse(d)
 
   // Return early if the form data is invalid
-  if (!validatedFields.success) {
-    return {
-      errors: validatedFields.error.flatten().fieldErrors,
-    }
-  }
+  if (!validatedFields.success) return { errors: validatedFields.error.flatten().fieldErrors }
 
   let images: string[];
 
-  if (d.images.includes(',')) {
-    images = d.images.split(',')
+  if (typeof formImages == 'string' && formImages.includes(',')) {
+    images = formImages.split(',')
   } else {
-    images = [d.images]
+    images = [formImages as string]
   }
 
-  const product = await prisma.product.create({
-    data: {
-      title: d.title,
-      desc: d.desc,
-      price: d.price,
-      images,
-      published: d.publish,
-      categoryId: d.categoryId
-    }
-  })
+  d.images = images
 
+  const product = await prisma.product.create({ data: d })
   redirect(`/dashboard/?newProduct=${product.id}`)
 }
 
-export async function updateProduct(formData: FormData) {
-  const images = formData.get("images")
-  console.log(images)
+interface ProductWithCategory {
+  category: {
+    id: number;
+    name: string;
+  };
+  id: string;
+  title: string;
+  desc: string;
+  images: string[];
+  price: number;
+  published: boolean;
+  categoryId: number;
+  createdAt: Date;
+
+}
+export async function updateProduct(product: ProductWithCategory, formData: FormData) {
+  const formImages = formData.get('images') as string
+  // data => formData
+  const d = {
+    title: formData.get('title') as string,
+    desc: formData.get('desc') as string,
+    images: [formImages],
+    price: Number(formData.get("price")),
+    published: (formData.get("publish") == "true"),
+    categoryId: parseInt(formData.get("category") as string)
+  }
+
+  const validatedFields = productSchema.safeParse(d)
+
+  // Return early if the form data is invalid
+  if (!validatedFields.success) return console.log(validatedFields.error.flatten().fieldErrors)
+
+  let images: string[];
+
+  if (typeof formImages == 'string' && formImages.includes(',')) {
+    images = formImages.split(',')
+  } else {
+    images = [formImages as string]
+  }
+
+  d.images = images
+
+  if (await prisma.product.update({ data: d, where: { id: product.id } })) {
+    revalidatePath(`/product/${product.id}`, 'page')
+    redirect(`/dashboard/?updatedProduct=${product.id}`)
+  }
 }
 
 export async function createOrder(data: OrderDataType, productId: string) {

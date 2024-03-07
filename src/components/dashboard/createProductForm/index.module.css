@@ -60,7 +60,7 @@
   transform: scale(1.5);
 }
 
-.submit {
+.form button[type="submit"] {
   padding: 1rem 2rem;
   background: #00ffffa8;
   color: #000;
@@ -73,7 +73,7 @@
   transition: background 0.2s ease-in-out;
 }
 
-.submit:hover {
+.form button[type="submit"]:hover {
   background: aqua;
 }
 

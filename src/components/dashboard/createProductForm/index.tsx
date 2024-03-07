@@ -1,17 +1,17 @@
 "use client"
 
-import { useFormState, useFormStatus } from 'react-dom'
+import { useFormState } from 'react-dom'
 import { Category } from '@prisma/client'
 import { createProduct } from '@/lib/actions'
 import classes from './index.module.css'
 import UploadImages from './UploadImages'
 import SelectCategory from './SelectCategory'
+import { SubmitButton } from './SubmitButton'
 
 const initialState: {
   errors: {
     title?: string[] | undefined;
     desc?: string[] | undefined;
-    images?: string[] | undefined;
     price?: string[] | undefined;
     publish?: string[] | undefined;
   }
@@ -21,7 +21,6 @@ const initialState: {
 
 export default function CreateProductForm({ categories }: { categories: Category[] }) {
   const [state, formAction] = useFormState(createProduct, initialState)
-  const { pending } = useFormStatus()
 
   const handelSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -33,7 +32,7 @@ export default function CreateProductForm({ categories }: { categories: Category
     <form onSubmit={handelSubmit} className={classes.form}>
       <div className={classes.formGroup}>
         <label htmlFor="title">Product Title</label>
-        <input type='text' name='title' id='title' placeholder='IPhone 15Pro Max' />
+        <input type='text' name='title' id='title' placeholder='Product Pro Max' />
         {state.errors.title && <p className={classes.error}>{state.errors.title[0]}</p>}
       </div>
 
@@ -62,7 +61,7 @@ export default function CreateProductForm({ categories }: { categories: Category
         <label htmlFor="publish">Publish on site</label>
       </div>
 
-      <button type='submit' className={classes.submit} aria-disabled={pending} disabled={pending}>Submit</button>
+      <SubmitButton>Create</SubmitButton>
     </form>
   )
 }

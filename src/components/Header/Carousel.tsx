@@ -13,24 +13,27 @@ interface Product {
 
 const Carousel = ({ products }: { products: Product[] }) => {
   const pathname = usePathname()
-  if (pathname !== '/' || products.length == 0) return
-  const [emblaRef] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 7000, stopOnUserInteraction: true })])
-
+  const [emblaRef] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 5000, stopOnUserInteraction: true })])
   return (
-    <div ref={emblaRef}>
-      <div>
-        {products.map(product => (
-          <div key={product.id}>
-            <div style={{ background: `url('${product.images[0]}') center / cover` }}>
-              <div>
-                <h3><Link href={`/product/${product.id}`}>{product.title}</Link></h3>
-                <h4>{product.price} DzD</h4>
+    <>
+      {pathname == '/' && products.length > 0 ? (
+        <div ref={emblaRef}>
+          <div>
+            {products.map(product => (
+              <div key={product.id}>
+                <div style={{ background: `url('${product.images[0]}') center / cover` }}>
+                  <div>
+                    <h3><Link href={`/product/${product.id}`}>{product.title}</Link></h3>
+                    <h4>{product.price} DzD</h4>
+                  </div>
+                </div>
               </div>
-            </div>
+            ))}
           </div>
-        ))}
-      </div>
-    </div>
+        </div>
+      ) : ''}
+    </>
+
   )
 }
 
