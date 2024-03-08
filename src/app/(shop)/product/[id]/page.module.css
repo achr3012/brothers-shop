@@ -1,8 +1,3 @@
-.thumb {
-  display: flex;
-  justify-content: center;
-}
-
 .info {
   display: flex;
   flex-direction: column;
@@ -37,6 +32,36 @@
 .photos ul li {
   display: inline-block;
   width: 49.9%;
+}
+
+.photos > div {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: center;
+  align-items: center;
+  background: rgb(0 0 0 / 90%);
+  z-index: 1;
+}
+
+.photos > div img {
+  width: 80%;
+}
+
+.photos > div button {
+  cursor: pointer;
+  position: relative;
+  right: calc(10% + 6px);
+  top: 46px;
+  align-self: end;
+  width: 40px;
+  height: 40px;
+  font-weight: bold;
+  font-size: 1.333rem;
 }
 
 .buy {

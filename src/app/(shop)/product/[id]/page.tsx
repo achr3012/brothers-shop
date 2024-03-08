@@ -1,17 +1,15 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import Image from 'next/image'
 import prisma from '@/lib/prisma'
 import OrderForm from '@/components/shop/OrderForm'
 
 import styles from './page.module.css'
 import { Noto_Sans_Arabic } from 'next/font/google'
+import ProductImages from '@/components/shop/product/ProductImages'
 export const noto_sans_arabic = Noto_Sans_Arabic({
   weight: ['400', '600'],
   subsets: ['arabic']
 })
-
-export const revalidate = 3600 // revalidate at most every hour
 
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
   const product = await prisma.product.findUnique({ where: { id: params.id }, select: { title: true, desc: true, images: true } })
@@ -35,20 +33,14 @@ export default async function ProductPage({ params }: { params: { id: string } }
   const [, ...photos] = product.images;
   return (
     <>
-      <div className={styles.thumb}>
-        <Image src={product.images[0]} alt={product.title} width={300} height={300} />
-      </div>
+      <div className={styles.thumb} style={{ background: `url('${product.images[0]}') center / contain no-repeat`, height: '333px' }} />
       <div className={styles.info}>
         <h2 className={styles.title} dir='auto'>{product.title}</h2>
         <p className={styles.desc} dir='auto'>{product.desc}</p>
         {photos.length > 0 && (
           <div className={styles.photos}>
             <h2>Photos</h2>
-            <ul>
-              {photos.map((url) => (
-                <li key={url}><Image src={url} width={180} height={180} alt={product.title} /></li>
-              ))}
-            </ul>
+            <ProductImages photos={photos} alt={product.title} />
           </div>
         )}
       </div>
