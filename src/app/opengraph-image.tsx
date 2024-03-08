@@ -1,11 +1,10 @@
-import Logo from '@/components/Logo'
 import { ImageResponse } from 'next/og'
 
 // Route segment config
 export const runtime = 'edge'
 
 // Image metadata
-export const alt = 'A brothers shop'
+export const alt = 'A Brothers Shop'
 export const size = {
   width: 1200,
   height: 630,
@@ -14,6 +13,29 @@ export const size = {
 export const contentType = 'image/png'
 
 // Image generation
-export default function Image() {
-  return new ImageResponse(<Logo />)
+export default async function Image() {
+  return new ImageResponse(
+    (
+      // ImageResponse JSX element
+      <div
+        style={{
+          fontSize: 128,
+          background: 'white',
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        A Brothers Shop
+      </div>
+    ),
+    // ImageResponse options
+    {
+      // For convenience, we can re-use the exported opengraph-image
+      // size config to also set the ImageResponse's width and height.
+      ...size
+    }
+  )
 }
