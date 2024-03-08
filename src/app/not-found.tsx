@@ -1,7 +1,7 @@
 import Link from "next/link"
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
-import { noto_sans_arabic } from "./(shop)/product/[id]/page"
+import { noto_sans_arabic } from "@/app/layout"
 
 export default function NotFound() {
   return (

@@ -2,7 +2,7 @@ import prisma from '@/lib/prisma'
 import Logo from '@/components/Logo'
 import styles from './index.module.css'
 import SearchForm from './SearchForm'
-import { noto_sans_arabic } from '@/app/(shop)/product/[id]/page'
+import { noto_sans_arabic } from '@/app/layout'
 import Navbar from './Navbar'
 import Carousel from './Carousel'
 

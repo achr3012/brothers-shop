@@ -4,6 +4,11 @@
   gap: 1rem;
 }
 
+.products h1 {
+  padding: 1rem 1rem 0;
+  direction: rtl;
+}
+
 .product {
   display: flex;
   align-items: center;

@@ -1,15 +1,10 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import prisma from '@/lib/prisma'
-import OrderForm from '@/components/shop/OrderForm'
-
-import styles from './page.module.css'
-import { Noto_Sans_Arabic } from 'next/font/google'
 import ProductImages from '@/components/shop/product/ProductImages'
-export const noto_sans_arabic = Noto_Sans_Arabic({
-  weight: ['400', '600'],
-  subsets: ['arabic']
-})
+import OrderForm from '@/components/shop/OrderForm'
+import { noto_sans_arabic } from '@/app/layout'
+import styles from './page.module.css'
 
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
   const product = await prisma.product.findUnique({ where: { id: params.id }, select: { title: true, desc: true, images: true } })
@@ -46,7 +41,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
       </div>
       <div id="buy" className={styles.formContainer}>
         <h3 className={noto_sans_arabic.className}>معلومات الزبون</h3>
-        <OrderForm productId={product.id} font={noto_sans_arabic} />
+        <OrderForm productId={product.id} />
       </div>
       <div className={styles.buy}>
         <p>{product.price} دج</p>

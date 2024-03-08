@@ -6,7 +6,7 @@ import styles from './index.module.css'
 import { wilayas } from "@/lib/wilayas"
 import { createOrder } from "@/lib/actions"
 import { communes } from "@/lib/communes"
-import { NextFont } from "next/dist/compiled/@next/font"
+import { noto_sans_arabic } from "@/app/layout"
 import { Order } from "@prisma/client"
 import OrderThanks from "../OrderThanks"
 
@@ -18,7 +18,7 @@ export interface OrderDataType {
   delivery: string;
 }
 
-function OrderForm({ productId, font }: { productId: string, font: NextFont }) {
+const OrderForm = ({ productId }: { productId: string }) => {
 
   const nameRef = useRef<HTMLInputElement>(null);
   const phoneRef = useRef<HTMLInputElement>(null);
@@ -84,7 +84,7 @@ function OrderForm({ productId, font }: { productId: string, font: NextFont }) {
     }
   }
   return (
-    <form onSubmit={submitHandler} className={`${styles.form} ${font.className}`} dir="rtl" lang="ar">
+    <form onSubmit={submitHandler} className={`${styles.form} ${noto_sans_arabic.className}`} dir="rtl" lang="ar">
       {order && <OrderThanks orderName={order.name} setOrder={setOrder} />}
       <div>
         <label htmlFor="name">الاسم الكامل 👤</label>
@@ -133,7 +133,7 @@ function OrderForm({ productId, font }: { productId: string, font: NextFont }) {
   )
 }
 
-export default OrderForm;
+export default OrderForm
 
 const CommuneOptions = ({ wilaya }: { wilaya: number }) => {
   const filteredCommunes = communes.filter(commune => commune.wilaya_id == wilaya);

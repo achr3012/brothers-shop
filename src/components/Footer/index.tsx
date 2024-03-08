@@ -1,5 +1,4 @@
-import { noto_sans_arabic } from '@/app/(shop)/product/[id]/page'
-import ProductPagePadding from './ProductPagePadding'
+import { noto_sans_arabic } from '@/app/layout'
 import styles from './index.module.css'
 export default function Footer() {
   return (
@@ -16,7 +15,6 @@ export default function Footer() {
         <div className={styles.copy}>
           <p>Made by <a href="https://instagram.com/its__achraf" target='_blank'>AcHReF</a></p>
           <p>A Brothers shop &copy; 2024</p>
-          {/* <ProductPagePadding /> */}
         </div>
       </div>
     </>

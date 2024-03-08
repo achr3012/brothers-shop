@@ -1,3 +1,4 @@
+import { noto_sans_arabic } from '@/app/layout';
 import styles from './index.module.css'
 import Image from "next/image";
 import Link from "next/link";
@@ -19,6 +20,7 @@ interface Product {
 export default function ProductsFeed({ products }: { products: Product[] }) {
   return (
     <div className={styles.products}>
+      <h1 className={noto_sans_arabic.className}>آخر المنتجات</h1>
       {products.length > 0 ? (
         <>{products.map(product => (
           <div key={product.id} className={styles.product}>

@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import { Metadata } from 'next'
 import './globals.css'
 
 
@@ -10,15 +10,18 @@ export const metadata: Metadata = {
     url: "https://abrothers-shop.vercel.app/",
     type: "article",
     title: 'Brothers Shop',
-    description: 'Brothers Shop',
-    images: '/logo.svg'
+    description: 'Brothers Shop'
   }
 }
 
-import { Noto_Sans } from 'next/font/google'
+import { Noto_Sans, Noto_Sans_Arabic } from 'next/font/google'
 const noto_sans = Noto_Sans({
   weight: ['300', '400', '600'],
   subsets: ['latin']
+})
+export const noto_sans_arabic = Noto_Sans_Arabic({
+  weight: ['400', '600'],
+  subsets: ['arabic']
 })
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
