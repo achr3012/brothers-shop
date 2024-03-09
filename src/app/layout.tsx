@@ -1,17 +1,17 @@
-import { Metadata } from 'next'
 import './globals.css'
 
-export const metadata: Metadata = {
-  title: 'Brothers Shop',
-  description: 'Brothers Shop',
-  authors: { name: "Achraf Aissaoui" },
-  openGraph: {
-    url: "https://abrothers-shop.vercel.app/",
-    type: "article",
-    title: 'Brothers Shop',
-    description: 'Brothers Shop'
-  }
-}
+// import { Metadata } from 'next'
+// export const metadata: Metadata = {
+//   title: 'Brothers Shop',
+//   description: 'Brothers Shop',
+//   authors: { name: "Achraf Aissaoui" },
+//   openGraph: {
+//     url: "https://abrothers-shop.vercel.app/",
+//     type: "article",
+//     title: 'Brothers Shop',
+//     description: 'Brothers Shop'
+//   }
+// }
 
 import { Noto_Sans, Noto_Sans_Arabic } from 'next/font/google'
 const noto_sans = Noto_Sans({
