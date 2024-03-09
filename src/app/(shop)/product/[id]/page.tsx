@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import prisma from '@/lib/prisma'
 import ProductImages from '@/components/shop/product/ProductImages'
 import OrderForm from '@/components/shop/OrderForm'
-import { noto_sans_arabic } from '@/app/layout'
+import { noto_sans_arabic } from '@/lib/fonts'
 import styles from './page.module.css'
 
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {

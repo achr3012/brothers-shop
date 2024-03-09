@@ -6,7 +6,7 @@ import styles from './index.module.css'
 import { wilayas } from "@/lib/wilayas"
 import { createOrder } from "@/lib/actions"
 import { communes } from "@/lib/communes"
-import { noto_sans_arabic } from "@/app/layout"
+import { noto_sans_arabic } from '@/lib/fonts'
 import { Order } from "@prisma/client"
 import OrderThanks from "../OrderThanks"
 
