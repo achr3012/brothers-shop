@@ -10,6 +10,7 @@ export const metadata: Metadata = {
     type: "article",
     title: 'Brothers Shop',
     description: 'Brothers Shop',
+    images: '/opengraph-image.png',
   }
 }
 
