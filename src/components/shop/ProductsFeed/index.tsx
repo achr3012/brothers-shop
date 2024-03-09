@@ -1,4 +1,4 @@
-import { noto_sans_arabic } from '@/app/layout';
+import { noto_sans_arabic } from '@/lib/fonts'
 import styles from './index.module.css'
 import Image from "next/image";
 import Link from "next/link";

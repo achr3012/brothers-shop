@@ -13,15 +13,12 @@ export const metadata: Metadata = {
   }
 }
 
-import { Noto_Sans, Noto_Sans_Arabic } from 'next/font/google'
+import { Noto_Sans } from 'next/font/google'
 const noto_sans = Noto_Sans({
   weight: ['300', '400', '600'],
   subsets: ['latin']
 })
-export const noto_sans_arabic = Noto_Sans_Arabic({
-  weight: ['400', '600'],
-  subsets: ['arabic']
-})
+
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
